@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/MainMenu/Scenes/MainMenu.unity
+    guid: 2c717f63c8bd047e2a25586bf7d58e38
+  - enabled: 1
+    path: Assets/Scenes/NPCragdolls.unity
+    guid: b9ccadf4f52eecc448bf2ac6ee946b66
   m_configObjects: {}
