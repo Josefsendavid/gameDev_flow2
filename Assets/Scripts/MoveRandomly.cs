@@ -6,8 +6,8 @@ using UnityEngine.AI;
 
 public class MoveRandomly : MonoBehaviour
 {
-    private NavMeshAgent agent; 
-    private Animator anim;
+    public NavMeshAgent agent; 
+    public Animator anim;
 
     private Vector3 targetDestination;
     // Start is called before the first frame update

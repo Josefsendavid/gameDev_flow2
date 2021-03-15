@@ -24,16 +24,22 @@ using System.Collections;
  
      void Update()
      {
-         transform.LookAt(Player);
  
-         if (Vector3.Distance(transform.position, Player.position) <= MaxDist)
+        if (Vector3.Distance(transform.position, Player.position) <= MaxDist)
         {               
+            transform.LookAt(Player);
             transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+            agent.speed = 1;
             anim.SetFloat("Speed", agent.speed);   
             if (Vector3.Distance(transform.position, Player.position) <= MinDist)
             {
                 //Here Call any function you want, like Shoot or something
             }   
+        }
+        if (Vector3.Distance(transform.position, Player.position) >= MaxDist)
+        {
+            agent.speed = 0;
+            anim.SetFloat("Speed", agent.speed);
         }
      }
  }
