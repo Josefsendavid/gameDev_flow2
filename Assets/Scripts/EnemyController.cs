@@ -30,11 +30,14 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void die()
+    public void die()
     {
-        Destroy(gameObject, 5f);
-        GetComponent<Animator>().enabled = false;
-        GetComponent<MoveRandomly>().enabled = false;
+          
+        GetComponentInChildren<AIController>().enabled = false;
+        GetComponentInChildren<Animator>().enabled = false;
+        GetComponentInChildren<MoveRandomly>().enabled = false;
+        Destroy(gameObject, 2f);
+        
         setRigidBodyState(false);
         setColliderState(true);
     }

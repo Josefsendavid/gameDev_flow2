@@ -60,6 +60,8 @@ public class PaladinMove : MonoBehaviour
                     agent.destination = hit.point;
                 }
             }
+        print("Is walking: " + walking);
+        print("Speed: " + agent.speed);
 }
         if(enemyClicked){
             Attack();
@@ -73,14 +75,20 @@ public class PaladinMove : MonoBehaviour
             walking = true;
         }
         anim.SetBool("isWalking", walking);
+        anim.SetBool("isAttacking", false);
         }
-    }
 
+         SetAnimationParameters();
+    }
+    private void SetAnimationParameters()
+    {
+        anim.SetFloat("Speed", agent.desiredVelocity.magnitude);
+    }
 
     void Attack(){
 
         agent.destination = targetedEnemy.position;
-
+        print(targetedEnemy);
         if(agent.remainingDistance > attackDistance){
             agent.isStopped = false;
             walking = true;
@@ -90,7 +98,11 @@ public class PaladinMove : MonoBehaviour
             transform.LookAt(targetedEnemy);
             anim.SetBool("isAttacking", false);
             Vector3 attackDir = targetedEnemy.transform.position - transform.position;
-
+            EnemyController enemy = targetedEnemy.transform.GetComponent<EnemyController>();
+            print(enemy);
+            
+            if(enemy.GetComponentInChildren<Animator>()){enemy.die();}
+            
             if(Time.time > nextAttack){
                 nextAttack = Time.time + attackRate;
                 anim.SetBool("isAttacking", true);
