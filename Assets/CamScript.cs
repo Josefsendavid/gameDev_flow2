@@ -11,7 +11,7 @@ public class CamScript : MonoBehaviour
     public float distance = 7f;
     public Vector3 offset;
     public float minDistance = 1f;
-    public float maxDistance = 7f;
+    public float maxDistance = 11f;
     
     [Header("Speeds")]
     public float smoothSpeed = 5f;

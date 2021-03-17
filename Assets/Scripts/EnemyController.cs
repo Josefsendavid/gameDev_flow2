@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     }
     */
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,7 @@ public class EnemyController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            die();
+
         }
     }
 
@@ -47,8 +49,13 @@ public class EnemyController : MonoBehaviour
         Rigidbody[] rigidbodies = GetComponentsInChildren<Rigidbody>();
 
         foreach(Rigidbody rigidbody in rigidbodies)
-        {
+        {   
             rigidbody.isKinematic = state;
+
+            Vector3 dir = new Vector3(Random.Range(-2, 2), Random.Range(0, 2), Random.Range(-2, 2));
+            rigidbody.AddForce(dir * 8, ForceMode.Impulse);
+            
+            
         }
 
         GetComponent<Rigidbody>().isKinematic = !state;

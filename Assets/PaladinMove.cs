@@ -37,12 +37,12 @@ public class PaladinMove : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             agent.speed = runSpeed;
-            anim.SetBool("isRunning", true);
+            //anim.SetBool("isRunning", true);
         } 
         else
         {
             agent.speed = walkSpeed;
-            anim.SetBool("isRunning", false);anim.SetBool("isWalking", true);
+            //anim.SetBool("isRunning", false);anim.SetBool("isWalking", true);
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -60,21 +60,26 @@ public class PaladinMove : MonoBehaviour
                     agent.destination = hit.point;
                 }
             }
-        print("Is walking: " + walking);
-        print("Speed: " + agent.speed);
-}
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            //die()
+
+        }
+
         if(enemyClicked){
             Attack();
         }
         else {
              if(agent.remainingDistance <= agent.stoppingDistance){
-            walking = false;
-            anim.SetBool("isRunning", false);
+            //walking = false;
+            //anim.SetBool("isRunning", false);
         }
         else {
-            walking = true;
+           // walking = true;
         }
-        anim.SetBool("isWalking", walking);
+        //anim.SetBool("isWalking", walking);
         anim.SetBool("isAttacking", false);
         }
 
@@ -86,29 +91,40 @@ public class PaladinMove : MonoBehaviour
     }
 
     void Attack(){
+        {
+        StartCoroutine(SomeCoroutine());
+        }
 
+        IEnumerator SomeCoroutine()
+        {
+
+        if(targetedEnemy != null){
         agent.destination = targetedEnemy.position;
-        print(targetedEnemy);
+        
         if(agent.remainingDistance > attackDistance){
             agent.isStopped = false;
             walking = true;
         }
         else if(agent.remainingDistance <= attackDistance) {
-            anim.SetBool("isWalking", false);
+            //anim.SetBool("isWalking", false);
             transform.LookAt(targetedEnemy);
             anim.SetBool("isAttacking", false);
             Vector3 attackDir = targetedEnemy.transform.position - transform.position;
             EnemyController enemy = targetedEnemy.transform.GetComponent<EnemyController>();
-            print(enemy);
             
-            if(enemy.GetComponentInChildren<Animator>()){enemy.die();}
             
             if(Time.time > nextAttack){
+                agent.speed = 0;
                 nextAttack = Time.time + attackRate;
                 anim.SetBool("isAttacking", true);
-            }
+                yield return new WaitForSeconds (0.2f);
+                if(enemy.GetComponentInChildren<Animator>()){
+                    enemy.die();}
+                
+            }}
             agent.isStopped = true;
-            walking = false;
-        }
+            //walking = false;
+          }
+    }
     }
 }
