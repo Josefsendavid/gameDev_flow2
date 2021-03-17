@@ -34,6 +34,7 @@ using System.Collections;
             if (Vector3.Distance(transform.position, Player.position) <= MinDist)
             {
                 //Here Call any function you want, like Shoot or something
+                
             }   
         }
         if (Vector3.Distance(transform.position, Player.position) >= MaxDist)
